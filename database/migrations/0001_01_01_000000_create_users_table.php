@@ -20,6 +20,7 @@ return new class extends Migration
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
+            $table->unsignedTinyInteger('user_type')->default(2); // 1 = Admin, 2 = Usuario Normal
             $table->timestamps();
         });
 

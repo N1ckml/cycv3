@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UsuarioController;
 
 // Ruta para el login
 Route::get('/', function () {
@@ -8,16 +9,21 @@ Route::get('/', function () {
 });
 
 // Rutas de usuarios, protegidas por autenticación
-Route::resource('/usuarios', 'App\Http\Controllers\UsuarioController')
-    ->middleware('auth');  // Asegúrate de proteger estas rutas con 'auth'
+Route::resource('/usuarios', UsuarioController::class)
+    ->middleware('auth');
 
-// Rutas de dashboard, protegidas también
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-])->group(function () {
+// Ruta de bienvenida para usuarios normales
+Route::get('/welcomeuser', function () {
+    return view('welcomeuser');
+})->name('welcomeuser')->middleware('auth');
+
+// Rutas de dashboard, con redirección según tipo de usuario
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', function () { 
-        return redirect('/usuarios'); // Redirige a /usuarios
+        if (Auth::user()->user_type === 1) {
+            return redirect('/usuarios'); // Redirige a /usuarios si es admin
+        } else {
+            return redirect()->route('welcomeuser'); // Redirige a welcomeuser si es usuario normal
+        }
     });
 });

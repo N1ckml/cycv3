@@ -3,21 +3,30 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-//usar el modelo
-use App\Models\Usuario;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class UsuarioController extends Controller
 {
-    
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
-        $usuarios = Usuario::all();
-        return view('usuario.index')->with('usuarios', $usuarios);
+        // Verificar el tipo de usuario para redirigir según corresponda
+        $user = Auth::user();
+
+        if ($user->user_type === 1) {
+            // Si es administrador, mostrar el listado de usuarios
+            $users = User::all(); // Cambiamos la variable a $users para que coincida con la vista
+            return view('usuario.index')->with('users', $users);
+        } elseif ($user->user_type === 2) {
+            // Si es usuario normal, redirigir a welcomeuser
+            return redirect()->route('welcomeuser');
+        } else {
+            // Redirección por defecto si el tipo de usuario no está definido
+            return redirect('/')->with('error', 'Tipo de usuario no permitido.');
+        }
     }
 
     /**
@@ -25,7 +34,6 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        //
         return view('usuario.create');
     }
 
@@ -34,25 +42,17 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $usuarios = new usuario();
-        $usuarios->nombre = $request->get('nombre');
-        $usuarios->apellido = $request->get('apellido');
-        $usuarios->dni = $request->get('dni');
-        $usuarios->celular = $request->get('celular');
-        $usuarios->correo = $request->get('correo');
-        $usuarios->contrasenia = $request->get('contrasenia');
+        $user = new User();
+        $user->name = $request->get('nombre');
+        $user->apellido = $request->get('apellido');
+        $user->dni = $request->get('dni');
+        $user->celular = $request->get('celular');
+        $user->email = $request->get('correo');
+        $user->password = bcrypt($request->get('contrasenia'));
+        $user->user_type = $request->get('user_type', 2); // Por defecto, usuario normal
 
-        $usuarios->save();
+        $user->save();
         return redirect('/usuarios');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
     }
 
     /**
@@ -60,9 +60,8 @@ class UsuarioController extends Controller
      */
     public function edit(string $id)
     {
-        //
-        $usuario = Usuario::find($id);
-        return view('usuario.edit')->with('usuario', $usuario);
+        $user = User::find($id);
+        return view('usuario.edit')->with('user', $user);
     }
 
     /**
@@ -70,17 +69,16 @@ class UsuarioController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
-        $usuario = Usuario::find($id);
+        $user = User::find($id);
 
-        $usuario->nombre = $request->get('nombre');
-        $usuario->apellido = $request->get('apellido');
-        $usuario->dni = $request->get('dni');
-        $usuario->celular = $request->get('celular');
-        $usuario->correo = $request->get('correo');
-        $usuario->contrasenia = $request->get('contrasenia');
+        $user->name = $request->get('nombre');
+        $user->apellido = $request->get('apellido');
+        $user->dni = $request->get('dni');
+        $user->celular = $request->get('celular');
+        $user->email = $request->get('correo');
+        $user->password = bcrypt($request->get('contrasenia'));
 
-        $usuario->save();
+        $user->save();
         return redirect('/usuarios');
     }
 
@@ -89,9 +87,8 @@ class UsuarioController extends Controller
      */
     public function destroy(string $id)
     {
-        //
-        $usuario = Usuario::find($id);
-        $usuario->delete();
+        $user = User::find($id);
+        $user->delete();
         return redirect('/usuarios');
     }
 }
