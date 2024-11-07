@@ -1,11 +1,13 @@
-@extends('layouts.plantillabase');
+@extends('adminlte::page')
 
-@section('css')
-<link href="https://cdn.datatables.net/2.1.8/css/dataTables.bootstrap5s.css" rel="stylesheet">
-@endsection
+@section('title', 'CRUD')
 
-@section('contenido')
-<a href="usuarios/create" class="btn btn-primary mb-3">CREAR</a>
+@section('content_header')
+    <h1>Listado de usuarios</h1>
+@stop
+
+@section('content')
+    <a href="usuarios/create" class="btn btn-primary mb-3">CREAR</a>
 
 <table id="usuarios" class="table table-striped table-bordered shadow-lg mt-4" style="width:100%">
 <thead class="bg-primary text-white">
@@ -42,6 +44,14 @@
     @endforeach
 </tbody>
 </table>
+@stop
+
+@section('css')
+    {{-- Add here extra stylesheets --}}
+    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
+    <link href="https://cdn.datatables.net/2.1.8/css/dataTables.bootstrap5s.css" rel="stylesheet">
+@stop
+
 @section('js')
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
@@ -56,5 +66,4 @@ $(document).ready(function(){
         });
 } );
 </script>
-@endsection
-@endsection
+@stop
