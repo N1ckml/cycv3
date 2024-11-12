@@ -21,6 +21,13 @@ return new class extends Migration
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
             $table->unsignedTinyInteger('user_type')->default(2); // 1 = Admin, 2 = Usuario Normal
+
+            //$table->string('nombre', 20);
+            $table->string('apellido', 20);
+            $table->string('dni', 10);
+            $table->string('celular', 10);
+            //$table->string('correo', 10);
+            //$table->string('contrasenia', 10);
             $table->timestamps();
         });
 

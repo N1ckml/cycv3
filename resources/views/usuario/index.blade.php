@@ -14,6 +14,9 @@
         <tr>
             <th scope="col">ID</th>
             <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+            <th scope="col">Celular</th>
+            <th scope="col">DNI</th>
             <th scope="col">Email</th>
             <th scope="col">Tipo de Usuario</th>
             <th scope="col">Acciones</th>
@@ -24,6 +27,9 @@
         <tr>
             <td>{{ $user->id }}</td>
             <td>{{ $user->name }}</td>
+            <td>{{ $user->apellido }}</td>
+            <td>{{ $user->celular }}</td>
+            <td>{{ $user->dni }}</td>
             <td>{{ $user->email }}</td>
             <td>{{ $user->user_type == 1 ? 'Administrador' : 'Usuario Normal' }}</td>
             <td>

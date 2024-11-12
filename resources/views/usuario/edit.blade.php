@@ -7,32 +7,32 @@
 @stop
 
 @section('content')
-<form action="/usuarios/{{ $usuario->id}}" method="POST">
+<form action="/usuarios/{{ $user->id}}" method="POST">
     @csrf
     @method('PUT')
     <div class="mb-3">
         <label for="" class="form-label">Nombre</label>
-        <input id="nombre" name="nombre" type="text" class="form-control" value="{{ $usuario->nombre}}">
+        <input id="name" name="name" type="text" class="form-control" value="{{ $user->name}}">
     </div>
     <div class="mb-3">
         <label for="" class="form-label">Apellido</label>
-        <input id="apellido" name="apellido" type="text" class="form-control" value="{{ $usuario->apellido}}">
+        <input id="apellido" name="apellido" type="text" class="form-control" value="{{ $user->apellido}}">
     </div>
     <div class="mb-3">
         <label for="" class="form-label">DNI</label>
-        <input id="dni" name="dni" type="text" class="form-control" value="{{ $usuario->dni}}">
+        <input id="dni" name="dni" type="text" class="form-control" value="{{ $user->dni}}">
     </div>
     <div class="mb-3">
         <label for="" class="form-label">Celular</label>
-        <input id="celular" name="celular" type="text" class="form-control" value="{{ $usuario->celular}}">
+        <input id="celular" name="celular" type="text" class="form-control" value="{{ $user->celular}}">
     </div>
     <div class="mb-3">
         <label for="" class="form-label">Correo</label>
-        <input id="correo" name="correo" type="text" class="form-control" value="{{ $usuario->correo}}">
+        <input id="email" name="email" type="text" class="form-control" value="{{ $user->email}}">
     </div>
     <div class="mb-3">
         <label for="" class="form-label">Contraseña</label>
-        <input id="contrasenia" name="contrasenia" type="text" class="form-control" value="{{ $usuario->contrasenia}}">
+        <input id="password" name="password" type="text" class="form-control" value="{{ $user->password}}">
     </div>
 
     <a href="/usuarios" class="btn btn-secondary" tabindexx="7">Cancelar</a>

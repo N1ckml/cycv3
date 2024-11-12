@@ -71,12 +71,12 @@ class UsuarioController extends Controller
     {
         $user = User::find($id);
 
-        $user->name = $request->get('nombre');
+        $user->name = $request->get('name');
         $user->apellido = $request->get('apellido');
         $user->dni = $request->get('dni');
         $user->celular = $request->get('celular');
-        $user->email = $request->get('correo');
-        $user->password = bcrypt($request->get('contrasenia'));
+        $user->email = $request->get('email');
+        $user->password = bcrypt($request->get('password'));
 
         $user->save();
         return redirect('/usuarios');
