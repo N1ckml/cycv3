@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\ProyectoController;
+
 
 // Ruta para el login
 Route::get('/', function () {
@@ -17,6 +19,8 @@ Route::get('/welcomeuser', function () {
     return view('welcomeuser');
 })->name('welcomeuser')->middleware('auth');
 
+Route::post('/proyectos', [ProyectoController::class, 'store'])->name('proyectos.store');
+
 // Rutas de dashboard, con redirección según tipo de usuario
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', function () { 
@@ -27,3 +31,5 @@ Route::middleware(['auth', 'verified'])->group(function () {
         }
     });
 });
+
+
