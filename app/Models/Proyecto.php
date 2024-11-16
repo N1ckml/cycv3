@@ -30,4 +30,9 @@ class Proyecto extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+    // Relación uno a muchos con Fase
+    public function fases()
+    {
+        return $this->hasMany(Fase::class);
+    }
 }
