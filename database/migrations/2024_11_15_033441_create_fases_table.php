@@ -13,11 +13,10 @@ return new class extends Migration
     {
         Schema::create('fases', function (Blueprint $table) {
             $table->id();
+            $table->string('nombre');
+            $table->text('descripcion')->nullable();
+            $table->foreignId('proyecto_id')->constrained()->onDelete('cascade'); // Relación con proyectos
             $table->timestamps();
-            $table->string('nombre'); // Nombre de la fase
-            $table->text('descripcion')->nullable(); // Descripción de la fase
-            $table->foreignId('proyecto_id')->constrained()->onDelete('cascade'); // Relación con proyecto
-            $table->integer('orden')->nullable(); // Orden de la fase dentro del proyecto
         });
     }
 

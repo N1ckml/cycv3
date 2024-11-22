@@ -6,6 +6,9 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
+use App\Models\Proyecto;
+use App\Models\Fase;
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -14,7 +17,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // Crear un usuario administrador
-        /*User::factory()->create([
+        User::factory()->create([
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
             'password' => Hash::make('123'), // Encripta la contraseña
@@ -23,7 +26,7 @@ class DatabaseSeeder extends Seeder
             'dni' => '1',
             'celular' => '1',
         ]);
-
+/*
         // Crear un usuario normal
         User::factory()->create([
             'name' => 'Juan',
@@ -43,6 +46,12 @@ class DatabaseSeeder extends Seeder
             'dni' => '7777777',
             'celular' => '98888888',
         ]);*/
-        $this->call(ProyectoSeeder::class);
+        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Este estaba descomentado antes de hacer el factoris de fases
+        //$this->call(ProyectoSeeder::class);
+
+        // Recorrer todos los proyectos y generar 5 fases para cada uno
+        //Proyecto::all()->each(function ($proyecto) {
+        //    Fase::factory()->count(5)->create(['proyecto_id' => $proyecto->id]);
+        //});
     }
 }
