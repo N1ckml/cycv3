@@ -36,4 +36,20 @@ class ProyectoController extends Controller
 
         return redirect()->back()->with('success', 'Proyecto creado con éxito.');
     }
+    
+public function selectProject(Request $request)
+{
+    $projectId = $request->input('proyecto_id');
+    
+    // Si quieres realizar algún procesamiento adicional con el ID, puedes hacerlo aquí.
+    
+    // Guardamos el ID del proyecto en la sesión para usarlo en la vista
+    session(['selected_project_id' => $projectId]);
+
+    // Devolvemos la respuesta JSON con el ID del proyecto
+    return response()->json([
+        'success' => true,
+        'projectId' => $projectId,
+    ]);
+}
 }

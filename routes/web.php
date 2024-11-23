@@ -5,6 +5,8 @@ use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\ProyectoController;
 use App\Models\Proyecto;
 
+//AGREGE ESTO PARA QUE SE VEA LOS DATOS DEL PROYECTO SELECCIONADO
+Route::post('/proyectos/select', [ProyectoController::class, 'selectProject'])->name('proyectos.select');
 
 // Ruta para el login
 Route::get('/', function () {

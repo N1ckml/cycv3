@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="./tailwind.css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <!-- AGREGE ESTO PARA QUE SE VEA LOS DATOS DEL PROYECTO SELECCIONADO-->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
 <body class="antialiased h-full">
@@ -75,9 +77,9 @@
                 </section>
 
                 <section aria-label="main content" class="flex min-h-0 flex-col flex-auto border-l">
-                    <nav class="bg-gray-100 p-4 flex items-center">
+<!-- Aquí se agregará el componente que llama el id del proyecto-->
+<x-project-item-header :tituloProyecto="session('selected_project_id')" />
 
-                    </nav>
 
                     <table>
 
