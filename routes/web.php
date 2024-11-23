@@ -11,15 +11,6 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get('/proyectos/{id}/fases', function ($id) {
-    $proyecto = Proyecto::with('fases')->find($id);
-
-    if (!$proyecto) {
-        return response()->json(['message' => 'Proyecto no encontrado'], 404);
-    }
-
-    return response()->json($proyecto->fases);
-});
 
 // Rutas de usuarios, protegidas por autenticación
 Route::resource('/usuarios', UsuarioController::class)
