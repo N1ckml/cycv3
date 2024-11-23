@@ -41,15 +41,18 @@ public function selectProject(Request $request)
 {
     $projectId = $request->input('proyecto_id');
     
-    // Si quieres realizar algún procesamiento adicional con el ID, puedes hacerlo aquí.
+    // Obtener el proyecto usando el ID
+    $proyecto = Proyecto::find($projectId);
     
-    // Guardamos el ID del proyecto en la sesión para usarlo en la vista
-    session(['selected_project_id' => $projectId]);
+// Guardar el nombre y la descripción del proyecto en la sesión
+    session(['selected_project_name' => $proyecto->nombre, 
+    'selected_project_description' => $proyecto->descripcion]);
 
-    // Devolvemos la respuesta JSON con el ID del proyecto
+    // Devolver la respuesta JSON con el nombre del proyecto
     return response()->json([
         'success' => true,
-        'projectId' => $projectId,
+        'projectName' => $proyecto->nombre,
+        'projectDescription' => $proyecto->descripcion,
     ]);
 }
 }

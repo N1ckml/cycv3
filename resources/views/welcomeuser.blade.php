@@ -77,8 +77,8 @@
                 </section>
 
                 <section aria-label="main content" class="flex min-h-0 flex-col flex-auto border-l">
-<!-- Aquí se agregará el componente que llama el id del proyecto-->
-<x-project-item-header :tituloProyecto="session('selected_project_id')" />
+                    <!-- Aquí se agregará el componente que llama el id del proyecto-->
+                    <x-project-item-header :tituloProyecto="session('selected_project_id')" />
 
 
                     <table>

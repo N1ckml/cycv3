@@ -36,8 +36,9 @@
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                // Actualizamos el contenido dinámicamente sin recargar la página
-                document.getElementById('selected-project-id').textContent = 'ID del proyecto seleccionado: ' + data.projectId;
+                // Actualizar el contenido dinámicamente con el nombre y la descripción del proyecto
+                document.getElementById('selected-project-name').textContent = 'Proyecto seleccionado: ' + data.projectName;
+                document.getElementById('selected-project-description').textContent = 'Descripción: ' + data.projectDescription;
             }
         })
         .catch(error => console.error('Error:', error));
